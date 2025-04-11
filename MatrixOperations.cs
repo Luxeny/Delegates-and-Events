@@ -6,21 +6,21 @@ public static class MatrixOperations
 {
     public static readonly MatrixOperation Diagonalize = delegate(SquareMatrix matrix)
     {
-        SquareMatrix result = new SquareMatrix(matrix.size);
-        for (int i = 0; i < matrix.size; i++)
+        SquareMatrix diagonalMatrix = new SquareMatrix(matrix.size);
+        for (int diagonalIndex = 0; diagonalIndex < matrix.size; ++diagonalIndex)
         {
-            result.dataOfMatrix[i, i] = matrix.dataOfMatrix[i, i];
+            diagonalMatrix.dataOfMatrix[diagonalIndex, diagonalIndex] = matrix.dataOfMatrix[diagonalIndex, diagonalIndex];
         }
-        return result;
+        return diagonalMatrix;
     };
 
     public static SquareMatrix ApplyOperations(SquareMatrix matrix, params MatrixOperation[] operations)
     {
-        SquareMatrix result = matrix;
-        foreach (var operation in operations)
+        SquareMatrix processedMatrix = matrix;
+        foreach (MatrixOperation operation in operations)
         {
-            result = operation(result);
+            processedMatrix = operation(processedMatrix);
         }
-        return result;
+        return processedMatrix;
     }
 }
