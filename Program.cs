@@ -41,6 +41,10 @@ public class Program
                 "\n12) Сравнения детерминантов" +
                 "\n13) Проверка равенства матриц" +
                 "\n14) Получить хэш-коды матриц" +
+                "\n15) Транспонировать матрицы" +
+                "\n16) Найти след матриц" +
+                "\n17) Привести к диагональному виду" +
+                "\n18) Применить цепочку операций" +
                 "\n0) Выйти");
             Write("Выберите действие: ");
             string input = ReadLine();
@@ -138,12 +142,41 @@ public class Program
                         WriteLine($"Хэш-код первой матрицы: {firstMatrix.GetHashCode()}");
                         WriteLine($"Хэш-код второй матрицы: {secondMatrix.GetHashCode()}");
                         break;
+                    case 15:
+                        WriteLine("Транспонированная первая матрица:");
+                        firstMatrix.Transpose().ToString();
+                        WriteLine("\nТранспонированная вторая матрица:");
+                        secondMatrix.Transpose().ToString();
+                        break;
+                    case 16:
+                        WriteLine($"След первой матрицы: {firstMatrix.Trace()}");
+                        WriteLine($"След второй матрицы: {secondMatrix.Trace()}");
+                        break;
+                    case 17:
+                        WriteLine("Диагональный вид первой матрицы:");
+                        MatrixOperations.Diagonalize(firstMatrix).ToString();
+                        WriteLine("\nДиагональный вид второй матрицы:");
+                        MatrixOperations.Diagonalize(secondMatrix).ToString();
+                        break;
+                    case 18:
+                        WriteLine("Результат цепочки операций (Транспонирование -> Диагонализация) для первой матрицы:");
+                        MatrixOperations.ApplyOperations(
+                            firstMatrix,
+                            MatrixExtensions.Transpose,
+                            MatrixOperations.Diagonalize
+                        ).ToString();
+                        WriteLine("\nРезультат для второй матрицы:");
+                        MatrixOperations.ApplyOperations(
+                            secondMatrix,
+                            MatrixExtensions.Transpose,
+                            MatrixOperations.Diagonalize
+                        ).ToString();
+                        break;
                     default:
                         WriteLine("Неверный выбор. Попробуйте снова.");
                         break;
                 }
             }
-
             catch (Exception ex)
             {
                 WriteLine($"Ошибка: {ex.Message}");
