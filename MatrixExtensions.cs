@@ -4,24 +4,24 @@ public static class MatrixExtensions
 {
     public static SquareMatrix Transpose(this SquareMatrix matrix)
     {
-        SquareMatrix result = new SquareMatrix(matrix.size);
-        for (int i = 0; i < matrix.size; i++)
+        SquareMatrix transposedMatrix = new SquareMatrix(matrix.size);
+        for (int row = 0; row < matrix.size; row++)
         {
-            for (int j = 0; j < matrix.size; j++)
+            for (int column = 0; column < matrix.size; column++)
             {
-                result.dataOfMatrix[i, j] = matrix.dataOfMatrix[j, i];
+                transposedMatrix.dataOfMatrix[row, column] = matrix.dataOfMatrix[column, row];
             }
         }
-        return result;
+        return transposedMatrix;
     }
 
     public static int Trace(this SquareMatrix matrix)
     {
-        int trace = 0;
-        for (int i = 0; i < matrix.size; i++)
+        int diagonalSum = 0;
+        for (int index = 0; index < matrix.size; index++)
         {
-            trace += matrix.dataOfMatrix[i, i];
+            diagonalSum += matrix.dataOfMatrix[index, index];
         }
-        return trace;
+        return diagonalSum;
     }
 }
